@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ========== META INFORMATION ========== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Via Media</title>
+    <meta name="description" content="Exploring the Anglican tradition through blogs, podcasts, etc.">
+
+    <!-- ========== ASSETS ========== -->
+    <link rel="icon" type="image/png" href="public/favicon.png">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <div class="page-bg home-bg">
+
+        <!-- ========== HEADER / NAVIGATION ========== -->
+        <header class="banner">
+            <div class="banner-container">
+                <!-- Logo -->
+                <a href="index.html" class="logo-link">
+                    <img src="public/images/logos/logo-transparent.png"
+                         alt="Ada Ferard Logo"
+                         class="logo"
+                         width="200"
+                         height="200">
+                </a>
+
+                <!-- Main Navigation -->
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html" class="active">Home</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="podcasts.html">Podcasts</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ========== MAIN CONTENT ========== -->
+        <main class="content" style="padding-top: 20px;">
+
+            <!-- ========== HERO SECTION ========== -->
+            <section id="home" class="hero bordered-section" style="padding: 20px; margin-bottom: 40px;">
+                <h1>Re-enchantment, the Anglican Way</h1>
+                <p class="drop-cap section-description">
+                    &nbsp;Through Word & Sacrament, beauty & tradition, reformation & catholicity, we can breathe new life
+                    into a decaying culture and proclaim the mystery of faith.
+                </p>
+            </section>
+
+            <!-- ========== ANGLICAN SPIRITUAL VOICES SLIDER ========== -->
+            <section id="spiritual-voices" style="padding-top: 5px; padding-bottom: 5px;">
+
+                <div class="card-slider-container" style="margin-top: 0; margin-bottom: 0;">
+                    <div class="card-slider" id="card-slider">
+                        <!-- Cards will be dynamically loaded from markdown files -->
+                        <div class="slider-card active" data-card="0">
+                            <div class="series-card" style="padding: 40px; text-align: center;">
+                                <p style="color: var(--body-text-color);">Loading spiritual voices...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Controls -->
+                    <div class="slider-controls">
+                        <button class="slider-btn prev-btn" onclick="changeCard(-1)" aria-label="Previous card">
+                            &larr; Previous
+                        </button>
+
+                        <div class="slider-dots">
+                            <span class="dot active" onclick="goToCard(0)"></span>
+                            <span class="dot" onclick="goToCard(1)"></span>
+                            <span class="dot" onclick="goToCard(2)"></span>
+                            <span class="dot" onclick="goToCard(3)"></span>
+                            <span class="dot" onclick="goToCard(4)"></span>
+                            <span class="dot" onclick="goToCard(5)"></span>
+                            <span class="dot" onclick="goToCard(6)"></span>
+                            <span class="dot" onclick="goToCard(7)"></span>
+                            <span class="dot" onclick="goToCard(8)"></span>
+                            <span class="dot" onclick="goToCard(9)"></span>
+                        </div>
+
+                        <button class="slider-btn next-btn" onclick="changeCard(1)" aria-label="Next card">
+                            Next &rarr;
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+
+        <!-- ========== FOOTER ========== -->
+        <footer class="site-footer">
+            <p>&copy; 2026 Via Media. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <!-- ========== JAVASCRIPT FOR CARD SLIDER ========== -->
+    <script>
+        // ========== Configuration ==========
+        let currentCard = 0;
+        let cards = [];
+        let dots = [];
+        let cardsLoaded = false;
+
+        // ========== Markdown Files List ==========
+        const markdownFiles = [
+            '00-introduction.md',
+            '01-cs-lewis-part1.md',
+            '02-cs-lewis-part2.md',
+            '03-j-john.md',
+            '04-sandy-millar.md',
+            '05-george-herbert-part1.md',
+            '06-george-herbert-part2.md',
+            '07-nicky-gumbel.md',
+            '08-ji-packer.md',
+            '09-tish-harrison-warren.md'
+        ];
+
+        // ========== Parse Frontmatter ==========
+        function parseFrontmatter(markdown) {
+            const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+            const match = markdown.match(frontmatterRegex);
+
+            if (!match) {
+                return { metadata: {}, content: markdown };
+            }
+
+            const frontmatterText = match[1];
+            const content = match[2];
+            const metadata = {};
+
+            // Parse YAML-like frontmatter
+            frontmatterText.split('\n').forEach(line => {
+                const colonIndex = line.indexOf(':');
+                if (colonIndex > 0) {
+                    const key = line.substring(0, colonIndex).trim();
+                    const value = line.substring(colonIndex + 1).trim();
+                    metadata[key] = value;
+                }
+            });
+
+            return { metadata, content };
+        }
+
+        // ========== Render Card HTML ==========
+        function renderCard(metadata, content, cardNumber) {
+            const type = metadata.type || 'quote';
+            let cardHTML = '';
+
+            if (type === 'intro') {
+                // Introduction card
+                cardHTML = `
+                    <div class="series-card" style="padding: 40px; text-align: center;">
+                        <h2 style="font-size: 36px; margin-bottom: 30px; color: var(--primary-red); border-bottom: 3px solid var(--gold); padding-bottom: 10px; display: inline-block;">
+                            ${metadata.title}
+                        </h2>
+                        <p class="drop-cap" style="font-size: 20px; line-height: 1.8; margin-top: 40px; text-align: left;">
+                            ${content.trim()}
+                        </p>
+                    </div>
+                `;
+            } else if (type === 'poem') {
+                // Poem card
+                const poemLines = content.trim().split('\n').map(line => {
+                    // Preserve indentation using &nbsp;
+                    return `<p style="margin: 8px 0;">${line}</p>`;
+                }).join('');
+
+                cardHTML = `
+                    <div class="series-card" style="padding: 40px;">
+                        <h3>${metadata.title}</h3>
+                        ${metadata.subtitle ? `<p class="subtitle">${metadata.subtitle}</p>` : ''}
+                        ${metadata.poem_title ? `<h4 style="font-size: 20px; color: var(--primary-red); margin-top: 5px; margin-bottom: 5px;">${metadata.poem_title}</h4>` : ''}
+                        <blockquote>
+                            ${poemLines}
+                        </blockquote>
+                        ${metadata.citation ? `<p class="citation" style="margin-top: 15px;">— ${metadata.citation}</p>` : ''}
+                    </div>
+                `;
+            } else {
+                // Quote card
+                cardHTML = `
+                    <div class="series-card" style="padding: 40px;">
+                        <h3>${metadata.title}</h3>
+                        ${metadata.subtitle ? `<p class="subtitle">${metadata.subtitle}</p>` : ''}
+                        <blockquote>
+                            ${content.trim()}
+                        </blockquote>
+                        ${metadata.citation ? `<p class="citation">— ${metadata.citation}</p>` : ''}
+                    </div>
+                `;
+            }
+
+            return cardHTML;
+        }
+
+        // ========== Load All Slider Cards ==========
+        async function loadSliderCards() {
+            try {
+                const loadPromises = markdownFiles.map(async (filename, index) => {
+                    const response = await fetch(`slider-cards/${filename}`);
+                    const markdown = await response.text();
+                    const { metadata, content } = parseFrontmatter(markdown);
+
+                    return {
+                        cardNumber: index,
+                        metadata: metadata,
+                        content: content,
+                        html: renderCard(metadata, content, index)
+                    };
+                });
+
+                const loadedCards = await Promise.all(loadPromises);
+
+                // Sort by card number to ensure correct order
+                loadedCards.sort((a, b) => a.cardNumber - b.cardNumber);
+
+                // Render cards
+                const sliderContainer = document.getElementById('card-slider');
+                sliderContainer.innerHTML = '';
+
+                loadedCards.forEach((card, index) => {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = `slider-card${index === 0 ? ' active' : ''}`;
+                    cardElement.setAttribute('data-card', card.cardNumber);
+                    cardElement.innerHTML = card.html;
+                    sliderContainer.appendChild(cardElement);
+                });
+
+                // Update cards and dots references
+                cards = document.querySelectorAll('.slider-card');
+                dots = document.querySelectorAll('.slider-dots .dot');
+                cardsLoaded = true;
+
+                // Show first card
+                showCard(0);
+
+            } catch (error) {
+                console.error('Error loading slider cards:', error);
+                const sliderContainer = document.getElementById('card-slider');
+                sliderContainer.innerHTML = `
+                    <div class="slider-card active" data-card="0">
+                        <div class="series-card" style="padding: 40px; text-align: center;">
+                            <h2 style="color: var(--primary-red); margin-bottom: 20px;">Unable to Load Slider Cards</h2>
+                            <p style="color: var(--body-text-color); margin-bottom: 15px;">
+                                Markdown files need to be loaded via HTTP (not file://).
+                            </p>
+                            <p style="color: var(--body-text-color); margin-bottom: 15px;">
+                                <strong>To view the slider:</strong>
+                            </p>
+                            <ol style="text-align: left; display: inline-block; margin-bottom: 20px; color: var(--body-text-color);">
+                                <li style="margin-bottom: 10px;">Open a terminal/command prompt</li>
+                                <li style="margin-bottom: 10px;">Navigate to the static folder: <code style="background: rgba(0,0,0,0.3); padding: 2px 6px;">cd Via_Media_Website/static</code></li>
+                                <li style="margin-bottom: 10px;">Run: <code style="background: rgba(0,0,0,0.3); padding: 2px 6px;">python -m http.server 8000</code></li>
+                                <li style="margin-bottom: 10px;">Open: <code style="background: rgba(0,0,0,0.3); padding: 2px 6px;">http://localhost:8000/index.html</code></li>
+                            </ol>
+                            <p style="color: #999; font-size: 14px; margin-top: 20px;">
+                                Error: ${error.message}
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // ========== Slider Navigation Functions ==========
+        function showCard(index) {
+            if (!cardsLoaded) return;
+
+            if (index < 0) index = cards.length - 1;
+            if (index >= cards.length) index = 0;
+
+            cards.forEach(card => card.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            cards[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentCard = index;
+        }
+
+        function changeCard(direction) {
+            showCard(currentCard + direction);
+        }
+
+        function goToCard(index) {
+            showCard(index);
+        }
+
+        // ========== Initialize on Page Load ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSliderCards();
+        });
+    </script>
+
+</body>
+</html>

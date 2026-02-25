@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ========== META INFORMATION ========== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Blog Post - Via Media</title>
+    <meta name="description" content="Via Media blog post">
+
+    <!-- ========== ASSETS ========== -->
+    <link rel="icon" type="image/png" href="public/favicon.png">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <div class="page-bg blog-bg">
+
+        <!-- ========== HEADER / NAVIGATION ========== -->
+        <header class="banner">
+            <div class="banner-container">
+                <a href="index.html" class="logo-link">
+                    <img src="public/images/logos/logo-transparent.png" alt="Ada Ferard Logo" class="logo" width="200" height="200">
+                </a>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="blog.html" class="active">Blog</a></li>
+                        <li><a href="podcasts.html">Podcasts</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ========== MAIN CONTENT ========== -->
+        <main class="content">
+
+            <!-- Back to Blog Link -->
+            <div style="margin-bottom: 20px;">
+                <a href="blog.html" style="color: var(--bright-red); text-decoration: none; font-weight: bold;">
+                    ← Back to Blog
+                </a>
+            </div>
+
+            <!-- ========== BLOG POST ========== -->
+            <article id="blog-post-content" class="series-card blog-post">
+                <p style="color: var(--body-text-color);">Loading blog post...</p>
+            </article>
+
+        </main>
+
+        <!-- ========== FOOTER ========== -->
+        <footer class="site-footer">
+            <p>&copy; 2026 Via Media. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <!-- ========== JAVASCRIPT FOR MARKDOWN RENDERING ========== -->
+    <script>
+        // ========== Get Post ID from URL ==========
+        function getPostId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('post');
+        }
+
+        // ========== Parse Frontmatter ==========
+        function parseFrontmatter(markdown) {
+            const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+            const match = markdown.match(frontmatterRegex);
+
+            if (!match) {
+                return { metadata: {}, content: markdown };
+            }
+
+            const frontmatterText = match[1];
+            const content = match[2];
+            const metadata = {};
+
+            frontmatterText.split('\n').forEach(line => {
+                const colonIndex = line.indexOf(':');
+                if (colonIndex > 0) {
+                    const key = line.substring(0, colonIndex).trim();
+                    const value = line.substring(colonIndex + 1).trim();
+                    metadata[key] = value;
+                }
+            });
+
+            return { metadata, content };
+        }
+
+        // ========== Format Date ==========
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        // ========== Load and Display Blog Post ==========
+        async function loadBlogPost() {
+            const postId = getPostId();
+
+            if (!postId) {
+                document.getElementById('blog-post-content').innerHTML = `
+                    <p style="color: var(--body-text-color);">No blog post specified.</p>
+                    <p><a href="blog.html" style="color: var(--bright-red);">Return to blog</a></p>
+                `;
+                return;
+            }
+
+            try {
+                const response = await fetch(`blog-posts/${postId}.md`);
+
+                if (!response.ok) {
+                    throw new Error('Post not found');
+                }
+
+                const markdown = await response.text();
+                const { metadata, content } = parseFrontmatter(markdown);
+
+                // Configure marked options
+                marked.setOptions({
+                    breaks: true,
+                    gfm: true
+                });
+
+                // Render markdown to HTML
+                const htmlContent = marked.parse(content);
+
+                // Format date
+                const formattedDate = metadata.date ? formatDate(metadata.date) : '';
+                const readTime = metadata.readTime || '';
+
+                // Update page title
+                if (metadata.title) {
+                    document.getElementById('page-title').textContent = `${metadata.title} - Via Media`;
+                }
+
+                // Display the blog post
+                const article = document.getElementById('blog-post-content');
+                article.innerHTML = `
+                    <h1 style="font-family: var(--header-font-family); font-size: var(--header-font-size-large); color: var(--header-color); margin-bottom: 10px;">
+                        ${metadata.title || 'Untitled'}
+                    </h1>
+                    <p class="meta">${formattedDate}${readTime ? ' • ' + readTime : ''}</p>
+                    <div class="blog-content">${htmlContent}</div>
+                `;
+
+                // Add drop-cap to first text paragraph
+                const allParagraphs = article.querySelectorAll('.blog-content p');
+                for (let p of allParagraphs) {
+                    // Find first paragraph with actual text content
+                    if (p.textContent.trim().length > 0 && !p.querySelector('img')) {
+                        p.classList.add('drop-cap');
+                        break;
+                    }
+                }
+
+            } catch (error) {
+                console.error('Error loading blog post:', error);
+                document.getElementById('blog-post-content').innerHTML = `
+                    <h1 style="font-family: var(--header-font-family); font-size: var(--header-font-size-large); color: var(--header-color);">
+                        Post Not Found
+                    </h1>
+                    <p style="color: var(--body-text-color);">Sorry, the requested blog post could not be found.</p>
+                    <p><a href="blog.html" style="color: var(--bright-red); font-weight: bold;">← Back to Blog</a></p>
+                `;
+            }
+        }
+
+        // ========== Initialize on Page Load ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            loadBlogPost();
+        });
+    </script>
+
+</body>
+</html>

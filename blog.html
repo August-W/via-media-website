@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ========== META INFORMATION ========== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Via Media</title>
+    <meta name="description" content="Reflections on the Anglican tradition, liturgy, theology, and the journey of faith">
+
+    <!-- ========== ASSETS ========== -->
+    <link rel="icon" type="image/png" href="public/favicon.png">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <div class="page-bg blog-bg">
+
+        <!-- ========== HEADER / NAVIGATION ========== -->
+        <header class="banner">
+            <div class="banner-container">
+                <a href="index.html" class="logo-link">
+                    <img src="public/images/logos/logo-transparent.png" alt="Ada Ferard Logo" class="logo" width="200" height="200">
+                </a>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="blog.html" class="active">Blog</a></li>
+                        <li><a href="podcasts.html">Podcasts</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ========== MAIN CONTENT ========== -->
+        <main class="content">
+
+            <!-- ========== BLOG POSTS GRID ========== -->
+            <section style="margin-top: 40px;">
+                <div id="blog-posts-container" class="card-grid">
+                    <p style="color: var(--body-text-color);">Loading blog posts...</p>
+                </div>
+
+                <!-- ========== PAGINATION CONTROLS ========== -->
+                <div id="pagination-controls" style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 40px;">
+                    <button id="prev-page" class="slider-btn" style="display: none;" onclick="changePage(-1)">
+                        &larr; Newer Posts
+                    </button>
+                    <span id="page-info" style="color: var(--body-text-color); font-weight: bold;"></span>
+                    <button id="next-page" class="slider-btn" style="display: none;" onclick="changePage(1)">
+                        Older Posts &rarr;
+                    </button>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ========== FOOTER ========== -->
+        <footer class="site-footer">
+            <p>&copy; 2026 Via Media. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <!-- ========== JAVASCRIPT FOR MARKDOWN BLOG ========== -->
+    <script>
+        // ========== Configuration ==========
+        const POSTS_PER_PAGE = 10;
+        let allPosts = [];
+        let currentPage = 1;
+
+        // ========== Markdown Files List ==========
+        // TO ADD A NEW POST: Just add the filename here and create the .md file
+        const markdownFiles = [
+            'beauty-theology.md',
+            'six-reasons-anglican-cited.md'
+        ];
+
+        // ========== Parse Frontmatter ==========
+        function parseFrontmatter(markdown) {
+            const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+            const match = markdown.match(frontmatterRegex);
+
+            if (!match) {
+                return { metadata: {}, content: markdown };
+            }
+
+            const frontmatterText = match[1];
+            const content = match[2];
+            const metadata = {};
+
+            // Parse YAML-like frontmatter
+            frontmatterText.split('\n').forEach(line => {
+                const colonIndex = line.indexOf(':');
+                if (colonIndex > 0) {
+                    const key = line.substring(0, colonIndex).trim();
+                    const value = line.substring(colonIndex + 1).trim();
+                    metadata[key] = value;
+                }
+            });
+
+            return { metadata, content };
+        }
+
+        // ========== Load All Markdown Posts ==========
+        async function loadBlogPosts() {
+            try {
+                const loadPromises = markdownFiles.map(async (filename) => {
+                    const response = await fetch(`blog-posts/${filename}`);
+                    const markdown = await response.text();
+                    const { metadata, content } = parseFrontmatter(markdown);
+
+                    return {
+                        id: filename.replace('.md', ''),
+                        title: metadata.title || 'Untitled',
+                        date: metadata.date || '',
+                        readTime: metadata.readTime || '',
+                        excerpt: metadata.excerpt || '',
+                        filename: filename,
+                        content: content
+                    };
+                });
+
+                allPosts = await Promise.all(loadPromises);
+
+                // Sort posts by date (newest first)
+                allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                displayPage(1);
+            } catch (error) {
+                console.error('Error loading blog posts:', error);
+                document.getElementById('blog-posts-container').innerHTML = `
+                    <div style="color: var(--body-text-color); text-align: center; padding: 40px;">
+                        <h2 style="color: var(--header-color); margin-bottom: 20px;">Unable to Load Blog Posts</h2>
+                        <p style="margin-bottom: 15px;">Markdown files need to be loaded via HTTP (not file://).</p>
+                        <p style="margin-bottom: 15px;"><strong>To view the blog:</strong></p>
+                        <ol style="text-align: left; display: inline-block; margin-bottom: 20px;">
+                            <li style="margin-bottom: 10px;">Open a terminal/command prompt</li>
+                            <li style="margin-bottom: 10px;">Navigate to the static folder: <code style="background: rgba(0,0,0,0.3); padding: 2px 6px;">cd Via_Media_Website/static</code></li>
+                            <li style="margin-bottom: 10px;">Run: <code style="background: rgba(0,0,0,0.3); padding: 2px 6px;">python -m http.server 8000</code></li>
+                            <li style="margin-bottom: 10px;">Open: <code style="background: rgba(0,0,0,0.3); padding: 2px 6px;">http://localhost:8000/blog.html</code></li>
+                        </ol>
+                        <p style="color: #999; font-size: 14px; margin-top: 20px;">
+                            Error: ${error.message}
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        // ========== Display Posts for Current Page ==========
+        function displayPage(pageNumber) {
+            currentPage = pageNumber;
+            const startIndex = (pageNumber - 1) * POSTS_PER_PAGE;
+            const endIndex = startIndex + POSTS_PER_PAGE;
+            const postsToShow = allPosts.slice(startIndex, endIndex);
+
+            const container = document.getElementById('blog-posts-container');
+            container.innerHTML = '';
+
+            if (postsToShow.length === 0) {
+                container.innerHTML = '<p style="color: var(--body-text-color);">No blog posts found.</p>';
+                return;
+            }
+
+            // Create blog post cards
+            postsToShow.forEach((post, index) => {
+                const article = document.createElement('article');
+                article.className = 'series-card blog-preview';
+                article.style.cursor = 'pointer';
+                article.style.transition = 'all 0.3s ease';
+
+                const formattedDate = formatDate(post.date);
+
+                article.innerHTML = `
+                    <h2>${post.title}</h2>
+                    <p class="meta">${formattedDate} • ${post.readTime}</p>
+                    <p class="drop-cap">
+                        ${post.excerpt}
+                    </p>
+                    <a href="blog-post.html?post=${post.id}" class="read-more">Read more →</a>
+                `;
+
+                // Make entire card clickable
+                article.addEventListener('click', (e) => {
+                    if (e.target.tagName !== 'A') {
+                        window.location.href = `blog-post.html?post=${post.id}`;
+                    }
+                });
+
+                container.appendChild(article);
+            });
+
+            updatePaginationControls();
+        }
+
+        // ========== Update Pagination Controls ==========
+        function updatePaginationControls() {
+            const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+            const prevButton = document.getElementById('prev-page');
+            const nextButton = document.getElementById('next-page');
+            const pageInfo = document.getElementById('page-info');
+
+            if (currentPage > 1) {
+                prevButton.style.display = 'inline-block';
+            } else {
+                prevButton.style.display = 'none';
+            }
+
+            if (currentPage < totalPages) {
+                nextButton.style.display = 'inline-block';
+            } else {
+                nextButton.style.display = 'none';
+            }
+
+            if (totalPages > 1) {
+                pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+            } else {
+                pageInfo.textContent = '';
+            }
+        }
+
+        // ========== Change Page ==========
+        function changePage(direction) {
+            const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+            const newPage = currentPage + direction;
+
+            if (newPage >= 1 && newPage <= totalPages) {
+                displayPage(newPage);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // ========== Format Date ==========
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        // ========== Initialize on Page Load ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            loadBlogPosts();
+        });
+    </script>
+
+</body>
+</html>
