@@ -901,7 +901,7 @@ article.blog-post::after {
         top: -30px;
         width: 100%;
         max-width: 100%;
-        overflow: hidden;
+        overflow: visible;
     }
 
     .main-nav ul {
