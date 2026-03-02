@@ -251,6 +251,7 @@ section[id] {
 .logo {
     height: 185px;
     width: auto;
+    max-width: 200px;
     transition: transform 0.3s ease;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
     object-fit: cover;
@@ -615,7 +616,7 @@ article.blog-post::after {
 
 .blog-content p {
     font-family: 'Almendra', serif;
-    font-size: var(--body-font-size);
+    font-size: 20px;
     line-height: var(--body-line-height);
     color: var(--body-text-color);
     margin-bottom: 20px;
@@ -885,17 +886,22 @@ article.blog-post::after {
     .banner-container {
         flex-direction: column;
         gap: 15px;
-        padding: 10px 20px;
+        padding: 10px 15px;
+        max-width: 100%;
+        overflow: hidden;
     }
 
     .logo {
-        height: 150px;
+        height: 200px;
+        max-width: 90vw;
         top: 0;
     }
 
     .main-nav {
         top: 0;
         width: 100%;
+        max-width: 100%;
+        overflow: hidden;
     }
 
     .main-nav ul {
@@ -990,7 +996,11 @@ article.blog-post::after {
 
     /* Blog content adjustments */
     .blog-content {
-        font-size: 16px;
+        font-size: 19px;
+    }
+
+    .blog-content p {
+        font-size: 19px;
     }
 
     .blog-content h1,
@@ -1081,10 +1091,12 @@ article.blog-post::after {
 
     .content {
         padding: 15px 10px;
+        max-width: 100%;
     }
 
     .logo {
-        height: 130px;
+        height: 180px;
+        max-width: 85vw;
     }
 
     .main-nav a {
