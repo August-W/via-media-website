@@ -885,20 +885,20 @@ article.blog-post::after {
 
     .banner-container {
         flex-direction: column;
-        gap: 8px;
+        gap: 0px;
         padding: 5px 15px;
         max-width: 100%;
         overflow: hidden;
     }
 
     .logo {
-        height: 160px;
+        height: 130px;
         max-width: 90vw;
         top: 0;
     }
 
     .main-nav {
-        top: 0;
+        top: -10px;
         width: 100%;
         max-width: 100%;
         overflow: hidden;
@@ -1095,8 +1095,12 @@ article.blog-post::after {
     }
 
     .logo {
-        height: 140px;
+        height: 110px;
         max-width: 85vw;
+    }
+
+    .main-nav {
+        top: -15px;
     }
 
     .main-nav a {
