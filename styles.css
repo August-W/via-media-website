@@ -886,9 +886,9 @@ article.blog-post::after {
     .banner-container {
         flex-direction: column;
         gap: 0px;
-        padding: 5px 15px;
+        padding: 5px 15px 15px 15px;
         max-width: 100%;
-        overflow: hidden;
+        overflow: visible;
     }
 
     .logo {
