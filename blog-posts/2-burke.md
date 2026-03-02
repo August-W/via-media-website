@@ -4,7 +4,7 @@ date: 2026-03-01
 excerpt: Discovering the missing link in a lineage of thought. 
 ---
 
-I must confess from the outset that, isn a previous life, I thoroughly amused myself as an upstart beanbag-chair-political-philosopher. Once philosophy had set me on my path to Christ, the pattern recognition I developed in this past life contributed much to my initial interest in the Anglican way of theology. Now, theological inquiry is reinvigorating my reading of philosophy. In the following rambling blog-thing, I shall relay my most recent revelation—that the link between Anglican theology and the political thought of Edmund Burke has chiefly to do with the influence of one man: the venerable Richard Hooker.
+I must confess from the outset that, in a previous life, I thoroughly amused myself as an upstart beanbag-chair-political-philosopher. Once philosophy had set me on my path to Christ, the pattern recognition I developed in this past life contributed much to my initial interest in the Anglican way of theology. Now, theological inquiry is reinvigorating my reading of philosophy. In the following rambling blog-thing, I shall relay my most recent revelation—that the link between Anglican theology and the political thought of Edmund Burke has chiefly to do with the influence of one man: the venerable Richard Hooker.
 
 Let us please begin with the French Revolution.
 
