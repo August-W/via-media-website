@@ -113,7 +113,3 @@ With holy mildew*
 <sup>14</sup> Richard Hooker, *Of the Laws of Ecclesiastical Polity*, Preface, Chapter 1, Section 2.
 
 <sup>15</sup> R.S. Thomas, "The Country Clergy," from *Song at the Year's Turning: Poems 1942-1954* (London: Rupert Hart-Davis, 1955). R.S. Thomas (1913-2000) was a Welsh poet and Anglican priest who served rural parishes throughout his ministry, writing extensively about the humble, often struggling life of country clergy and their parishioners.
-
----
-
-*[End of post]*
