@@ -885,14 +885,14 @@ article.blog-post::after {
 
     .banner-container {
         flex-direction: column;
-        gap: 15px;
-        padding: 10px 15px;
+        gap: 8px;
+        padding: 5px 15px;
         max-width: 100%;
         overflow: hidden;
     }
 
     .logo {
-        height: 200px;
+        height: 160px;
         max-width: 90vw;
         top: 0;
     }
@@ -1095,7 +1095,7 @@ article.blog-post::after {
     }
 
     .logo {
-        height: 180px;
+        height: 140px;
         max-width: 85vw;
     }
 
