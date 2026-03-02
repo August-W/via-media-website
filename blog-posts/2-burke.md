@@ -1,6 +1,10 @@
-# Burke, Burke, Burke, Burke, Burke
+---
+title: Burke, Burke, Burke, Burke, Burke
+date: 2026-03-01
+excerpt: Discovering the missing link in a lineage of thought. 
+---
 
-I must confess from the outset that, in a previous life, I thoroughly amused myself as an upstart beanbag-chair-political-philosopher. Once philosophy had set me on my path to Christ, the pattern recognition I developed in this past life contributed much to my initial interest in the Anglican way of theology. Now, theological inquiry is reinvigorating my reading of philosophy. In the following rambling blog-thing, I shall relay my most recent revelation—that the link between Anglican theology and the political thought of Edmund Burke has chiefly to do with the influence of one man: the venerable Richard Hooker.
+I must confess from the outset that, isn a previous life, I thoroughly amused myself as an upstart beanbag-chair-political-philosopher. Once philosophy had set me on my path to Christ, the pattern recognition I developed in this past life contributed much to my initial interest in the Anglican way of theology. Now, theological inquiry is reinvigorating my reading of philosophy. In the following rambling blog-thing, I shall relay my most recent revelation—that the link between Anglican theology and the political thought of Edmund Burke has chiefly to do with the influence of one man: the venerable Richard Hooker.
 
 Let us please begin with the French Revolution.
 
@@ -22,8 +26,7 @@ The French-English dichotomy is symbolized most elegantly by the characteristic 
 
 This is also illustrative of the distinction between a civil law and common law system. English common law was an emergent system, rooted in the soil of quotidian lower court decisions, growing into interwoven branches of precedent (read: history and tradition) from which sprouted budding laws, principles, and rights.
 
-![French garden](blog-posts/images/2-burke/2.png)
-![English garden](blog-posts/images/2-burke/3.png)
+![French garden](blog-posts/images/2-burke/2.png) ![English garden](blog-posts/images/2-burke/3.png)
 
 ## Deo Gracias Anglia
 
