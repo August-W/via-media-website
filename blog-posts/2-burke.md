@@ -68,11 +68,11 @@ The conflict between revolutionaries and reformers is a perennial problem. Richa
 
 ### A Selection From "The Country Clergy"
 
->> I see them working in old rectories  
->> By the sun's light, by candlelight  
->> Venerable men, their black cloth  
->> A little dusty, a little green  
->> With holy mildew  
+> I see them working in old rectories  
+> By the sun's light, by candlelight  
+> Venerable men, their black cloth  
+> A little dusty, a little green  
+> With holy mildew  
 
 ~ R.S. Thomas<sup>15</sup>
 
