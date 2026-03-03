@@ -20,11 +20,7 @@ More pertinent is Edmund Burke's perspective of the appalling events that ensued
 
 Conservative though he was, Burke was no mere reactionary traditionalist. He loved his country and discerned that the only way to conserve her was to reform her, with such reforms as would integrate her past with her future. The French desired to liberate themselves from their own history—to sever it, even by guillotine. Burke, on the other hand, placed more emphasis on a particular aspect of social contract theory—that society is a contract between the living, the unborn, and the dead. Our decisions should take into account their effects on future generations, and they should honor our forefathers.<sup>3</sup> Jacobin sympathizer Thomas Paine, and Thomas Jefferson for that matter, conceived of a very different social contract, in which each generation would draft its own constitution.<sup>4</sup> Needless to say, this way lies madness. (Imagine us attempting that today!) A nation is a covenant, inter-generational, for you and for your children. We are all one body, an organic system that "grows, it evolves; its various parts are all adaptations to the necessities of human needs and wishes."<sup>5</sup>
 
-Edmund Burke was an empiricist—he grounded his political approach in the experiences of real people through history.<sup>6</sup> As he put it, 
-
-> Reform should be limited and cautious, take into account the past and be based on empiricism and tradition. 
-
-The purely rationalist mode of inquiry, rooted in Descartes, undoubtedly has its appropriate uses. But, when applied to government, it invariably tends toward the wanton demolition of a living society to reconstruct it in the image of some unrealized ideal—a tower reaching to heaven, built by human reason alone. 
+Edmund Burke was an empiricist—he grounded his political approach in the experiences of real people through history.<sup>6</sup> As he put it, "Reform should be limited and cautious, take into account the past and be based on empiricism and tradition." The purely rationalist mode of inquiry, rooted in Descartes, undoubtedly has its appropriate uses. But, when applied to government, it invariably tends toward the wanton demolition of a living society to reconstruct it in the image of some unrealized ideal—a tower reaching to heaven, built by human reason alone. 
 
 Contrary to this French radicalism, Burke represents the self-restraint of the English. France and England function almost as cultural archetypes… one for revolution, the other for reform—one for the tyranny of reason, the other reasonableness. (I will cop to being a bit of an anglophile) The French-English dichotomy is symbolized most elegantly by the characteristic differences between French and English gardens. I love Jonah Goldberg's elaboration: 
 
@@ -72,11 +68,11 @@ The conflict between revolutionaries and reformers is a perennial problem. Richa
 
 ### A Selection From "The Country Clergy"
 
-*I see them working in old rectories  
-By the sun's light, by candlelight  
-Venerable men, their black cloth  
-A little dusty, a little green  
-With holy mildew*
+>> I see them working in old rectories  
+>> By the sun's light, by candlelight  
+>> Venerable men, their black cloth  
+>> A little dusty, a little green  
+>> With holy mildew  
 
 ~ R.S. Thomas<sup>15</sup>
 
