@@ -880,14 +880,14 @@ article.blog-post::after {
     .banner {
         height: auto;
         overflow: visible;
-        padding: 5px 0 15px 0;
+        padding: 0px 0 10px 0;
         min-height: fit-content;
     }
 
     .banner-container {
         flex-direction: column;
         gap: 0px;
-        padding: 0px 15px 10px 15px;
+        padding: 0px 15px 5px 15px;
         max-width: 100%;
         overflow: visible;
     }
@@ -899,7 +899,7 @@ article.blog-post::after {
     }
 
     .main-nav {
-        top: -50px;
+        top: -30px;
         width: 100%;
         max-width: 100%;
         overflow: visible;
@@ -1101,7 +1101,7 @@ article.blog-post::after {
     }
 
     .main-nav {
-        top: -60px;
+        top: -40px;
     }
 
     .main-nav a {
