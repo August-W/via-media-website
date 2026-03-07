@@ -71,11 +71,56 @@
                 <div class="series-card">
                     <h2>Sermons</h2>
                     <p class="drop-cap">Classic Anglican sermons written by Henry Parry Liddon (1829–1890), read with AI.</p>
-                    <div style="margin-top: 20px;">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/MiV1Uc3xs-M?si=UoAh9I1bm6bxxW_f" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/5myE0lAO3HY?si=19m4QLakDO8z6bI0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/6HNKTNpwG2A?si=MH7PJ5ukm6FY4HXf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/9rnT5aDoMO0?si=-49EDkvYKPKRrFwW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                    <!-- Video Slider -->
+                    <div class="card-slider-container" style="margin-top: 30px;">
+                        <div class="card-slider" id="video-slider">
+                            <!-- Video 1 -->
+                            <div class="slider-card active" data-video="0">
+                                <div style="display: flex; justify-content: center; align-items: center;">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/MiV1Uc3xs-M?si=UoAh9I1bm6bxxW_f" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                            </div>
+
+                            <!-- Video 2 -->
+                            <div class="slider-card" data-video="1">
+                                <div style="display: flex; justify-content: center; align-items: center;">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/5myE0lAO3HY?si=19m4QLakDO8z6bI0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                            </div>
+
+                            <!-- Video 3 -->
+                            <div class="slider-card" data-video="2">
+                                <div style="display: flex; justify-content: center; align-items: center;">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/6HNKTNpwG2A?si=MH7PJ5ukm6FY4HXf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                            </div>
+
+                            <!-- Video 4 -->
+                            <div class="slider-card" data-video="3">
+                                <div style="display: flex; justify-content: center; align-items: center;">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/9rnT5aDoMO0?si=-49EDkvYKPKRrFwW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Controls -->
+                        <div class="slider-controls">
+                            <button class="slider-btn prev-btn" onclick="changeVideo(-1)" aria-label="Previous video">
+                                &larr; Previous
+                            </button>
+
+                            <div class="slider-dots">
+                                <span class="dot active" onclick="goToVideo(0)"></span>
+                                <span class="dot" onclick="goToVideo(1)"></span>
+                                <span class="dot" onclick="goToVideo(2)"></span>
+                                <span class="dot" onclick="goToVideo(3)"></span>
+                            </div>
+
+                            <button class="slider-btn next-btn" onclick="changeVideo(1)" aria-label="Next video">
+                                Next &rarr;
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -86,5 +131,32 @@
             <p>&copy; 2026 Via Media. All rights reserved.</p>
         </footer>
     </div>
+
+    <!-- Video Slider JavaScript -->
+    <script>
+        let currentVideo = 0;
+        const videoCards = document.querySelectorAll('#video-slider .slider-card');
+        const videoDots = document.querySelectorAll('#video-slider + .slider-controls .slider-dots .dot');
+
+        function showVideo(index) {
+            if (index < 0) index = videoCards.length - 1;
+            if (index >= videoCards.length) index = 0;
+
+            videoCards.forEach(card => card.classList.remove('active'));
+            videoDots.forEach(dot => dot.classList.remove('active'));
+
+            videoCards[index].classList.add('active');
+            videoDots[index].classList.add('active');
+            currentVideo = index;
+        }
+
+        function changeVideo(direction) {
+            showVideo(currentVideo + direction);
+        }
+
+        function goToVideo(index) {
+            showVideo(index);
+        }
+    </script>
 </body>
 </html>
