@@ -162,25 +162,10 @@
                     </div>
 
                         <!-- Navigation Controls -->
-                        <div class="slider-controls" style="margin-top: -30px; gap: 15px;">
+                        <div class="slider-controls" style="margin-top: -15px; gap: 20px; justify-content: center;">
                             <button class="slider-btn prev-btn" onclick="changeVideo(-1)" aria-label="Previous video">
                                 &larr; Previous
                             </button>
-
-                            <div class="slider-dots" style="display: none;">
-                                <span class="dot active" onclick="goToVideo(0)"></span>
-                                <span class="dot" onclick="goToVideo(1)"></span>
-                                <span class="dot" onclick="goToVideo(2)"></span>
-                                <span class="dot" onclick="goToVideo(3)"></span>
-                                <span class="dot" onclick="goToVideo(4)"></span>
-                                <span class="dot" onclick="goToVideo(5)"></span>
-                                <span class="dot" onclick="goToVideo(6)"></span>
-                                <span class="dot" onclick="goToVideo(7)"></span>
-                                <span class="dot" onclick="goToVideo(8)"></span>
-                                <span class="dot" onclick="goToVideo(9)"></span>
-                                <span class="dot" onclick="goToVideo(10)"></span>
-                                <span class="dot" onclick="goToVideo(11)"></span>
-                            </div>
 
                             <button class="slider-btn next-btn" onclick="changeVideo(1)" aria-label="Next video">
                                 Next &rarr;
@@ -200,18 +185,21 @@
     <!-- Video Slider JavaScript -->
     <script>
         let currentVideo = 0;
-        const videoCards = document.querySelectorAll('#video-slider .slider-card');
-        const videoDots = document.querySelectorAll('#video-slider + .slider-controls .slider-dots .dot');
+        let videoCards = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            videoCards = document.querySelectorAll('#video-slider .slider-card');
+            console.log('Found ' + videoCards.length + ' video cards');
+        });
 
         function showVideo(index) {
+            if (videoCards.length === 0) return;
+
             if (index < 0) index = videoCards.length - 1;
             if (index >= videoCards.length) index = 0;
 
             videoCards.forEach(card => card.classList.remove('active'));
-            videoDots.forEach(dot => dot.classList.remove('active'));
-
             videoCards[index].classList.add('active');
-            videoDots[index].classList.add('active');
             currentVideo = index;
         }
 
