@@ -1,8 +1,12 @@
-# Holy Order
+---
+title: Holy Order
+date: 2026-03-24
+excerpt: Aristotle, Augustine, and Bosch walk into a bar. Nobody gets drunk. 
+---
 
 In my previous post, I waxed philosophical and rambled about Edmund Burke's conservative critique of the radical French Revolution, informed by Richard Hooker's arguments against the puritans. I now endeavor to distinguish this conservative sensibility from "lukewarmness" by making the case for a rightly ordered practice of faith, and (sincerely intending to make this blog more devotional than philosophical, in spite of my incorrigible habit of mind) to describe how I personally experience spirituality in this context.
 
-But what exactly is meant by *right order?* Consider the relief one feels after a daunting excursion to the Taco Bell drive through, cracking open the cardboard box to find the expected Crunchwrap Supreme. *Ahh, they got my order right this time.* Well, this is not at all what I am talking about. To walk in the Way of Christ is to hike uphill in sanctification. It involves a *purgative* process of turning away from sin, an *illuminative* process of turning toward virtue, and a *unitive* process of growing in union with Christ (Whew, this is a jargon-heavy paragraph, but please abide with me.) These processes are all about rightly ordering our loves, conforming to God's order and will. As Saint Augustine said,
+But what exactly is meant by *right order?* Consider the relief one feels after a daunting excursion to the Taco Bell drive through, cracking open the cardboard box to find the expected Crunchwrap Supreme. *Ah, they got my order right this time.* Well, this is not at all what I am talking about. To walk in the Way of Christ is to hike uphill in sanctification. It involves a *purgative* process of turning away from sin, an *illuminative* process of turning toward virtue, and a *unitive* process of growing in union with Christ (Whew, this is a jargon-heavy paragraph, but please abide with me.) These processes are all about rightly ordering our loves, conforming to God's order and will. As Saint Augustine said,
 
 > Thou madest us for Thyself, and our heart is restless, until it repose in Thee.<sup>1</sup>
 
